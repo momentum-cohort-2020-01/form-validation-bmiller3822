@@ -1,47 +1,102 @@
 console.log('Add validation!');
  
     let fields = document.querySelectorAll(".field")
+    var letters = /^[A-Za-z]+$/;
+    var lettersAndNumbers = /^[0-9a-zA-Z]+$/;
     
   
     let parkingForm = document.querySelector("#parking-form")
     parkingForm.addEventListener("submit", function(e){
-        e.preventDefault();
+        e.preventDefault()
         for (let input of fields){
-        console.log(input);
+        console.log(input)
         if (input.value === ""){
             console.log("Nothing here!")
             if (input.parentElement.classList.contains("input-invalid")){
             } else {
+            input.parentElement.classList.remove("input-valid")
             input.parentElement.classList.add("input-invalid")
             let required = document.createElement("p")
-            console.log(required);
+            console.log(required)
             required.innerText = "*Required"
             required.classList.add("required")
             input.parentElement.appendChild(required)
         }
         } else {
             console.log("Stuff in there")
+            input.parentElement.classList.remove("input-invalid")
             input.parentElement.classList.add("input-valid")
-            let required = input.parentElement.querySelector("p")
-            if (required){
-                input.parentElement.removeChild(required);
+            let requiredTwo = input.parentElement.querySelector("p")
+            if (requiredTwo){
+                input.parentElement.removeChild(requiredTwo)
             }
         }
     }})
 
-    //Second event listener if needed
-    // parkingForm.addEventListener("submit", function(e){
-    //     e.preventDefault();
+//Need to do the 3 car fields as well.  
+// Name = Text
+// Car year = 4 Digits 
+// Car make = Text
+// Car model = Text
+// Date parking = date 
+// Number of days = any digits 
+// Credit card = 16 digits 
+// CVV = 3 digits 
+// Expiration = month/year (2 digits/2 digits) 
 
-    // });
 
+
+
+
+// Function to check letters and numbers
+// function alphanumeric(inputtxt)
+// {
+//  var letterNumber = /^[0-9a-zA-Z]+$/;
+//  if((inputtxt.value.match(letterNumber)) 
+//   {
+//    return true;
+//   }
+// else
+//   { 
+//    alert("message"); 
+//    return false; 
+//   }
+//   }
+
+// Function to check just for letters
+// function allLetter(inputtxt)
+//   {
+//    var letters = /^[A-Za-z]+$/;
+//    if(inputtxt.value.match(letters))
+//      {
+//       return true;
+//      }
+//    else
+//      {
+//      alert("message");
+//      return false;
+//      }
+//   }
+
+    //pseudo code for Dane
+    //grab all the html elements with that .field class
+    //grab the entire parking form
+    //add event listener
+    //prevent default so it doesn't refresh
+    //for of loop to loop through all of the input fields that have that .field class
+    //if else statement, looking for if the field is blank
+    //if there's nothing in the field that we're looping through, add the "input-invalid" class
+    //the else statement is saying if there's ANYTHING in the field, add the "input-valid" class
+
+  
+    //Note:
     // if (node.parentNode) {
     //     // remove a node from the tree, unless 
     //     // it's not in the tree already
     //     node.parentNode.removeChild(node);
     //   }
 
-//failed removal attemps
+//failed removal attempts
     // let reqP = node.parentNode;
     //         if (reqP.input.parentElement){
     //             reqP.input.parentElement.removeChild(reqP);
