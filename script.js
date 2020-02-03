@@ -1,3 +1,8 @@
+//I seem to have broken things with this crazy class scheme I was trying for step 3, but I have a working step 2 down below (line 211)
+//parseInt is something to look at for this assignment.  
+//moment.js for date validation
+//Check out examples repo for how Clinton did it.  
+
 console.log('Add validation!');
 
 let fields = document.querySelectorAll(".field")
@@ -10,8 +15,9 @@ let days = document.querySelector("#days");
 let creditCard = document.querySelector("#credit-card");
 let cvv = document.querySelector("#cvv");
 let expiration = document.querySelector("#expiration");
-let letters = /^[A-z]+$/; 
+let letters = /^[A-z-]+$/; 
 let lettersAndNumbers = /^[0-9a-zA-Z]+$/ ;
+let numbers = new RegExp('^[0-9]+$');
 
 let parkingForm = document.querySelector("#parking-form")
 parkingForm.addEventListener("submit", function (e) {
@@ -22,9 +28,17 @@ parkingForm.addEventListener("submit", function (e) {
             console.log("Nothing here!")
             if (input.parentElement.classList.contains("randomOne")) {  //"input-invalid"  and classList  if (input.parentElement.classList.contains(p))
             } else {
-                input.parentElement.classList.add("randomOne")
                 input.parentElement.classList.remove("randomTwo")
+                input.parentElement.classList.remove("randomThree")
+                input.parentElement.classList.remove("randomFour")
+                input.parentElement.classList.remove("randomFive")
+                input.parentElement.classList.remove("randomSix")
+                input.parentElement.classList.remove("randomSeven")
+                input.parentElement.classList.remove("randomEight")
+                input.parentElement.classList.remove("randomNine")
+                input.parentElement.classList.remove("randomTen")
                 input.parentElement.classList.remove("input-valid")
+                input.parentElement.classList.add("randomOne")
                 input.parentElement.classList.add("input-invalid")
                 let noText = input.parentElement.querySelector("p")
                 if (noText) {
@@ -39,9 +53,9 @@ parkingForm.addEventListener("submit", function (e) {
         } else if (!letters.test(nameInput.value)){
             if (nameInput.parentElement.classList.contains("randomTwo")){ //"input-invalid"
             } else {
-            nameInput.parentElement.classList.add("randomTwo")
             nameInput.parentElement.classList.remove("randomOne")
             nameInput.parentElement.classList.remove("input-valid")
+            nameInput.parentElement.classList.add("randomTwo")
             nameInput.parentElement.classList.add("input-invalid")
             let wrongText = nameInput.parentElement.querySelector("p")
             if (wrongText) {
@@ -49,12 +63,27 @@ parkingForm.addEventListener("submit", function (e) {
             }
             let required = document.createElement("p")
             console.log(required)
-            required.innerText = "*Please enter Name using [A-z]"
+            required.innerText = "*Please enter Name using [A-Z]"
             required.classList.add("required")
             nameInput.parentElement.appendChild(required)
             }
-        // } else if (x>0){}
-          
+        } else if (!numbers.test(carYear.value)){
+                if (carYear.parentElement.classList.contains("randomThree")){ //"input-invalid"
+                } else {
+                carYear.parentElement.classList.add("randomThree")
+                carYear.parentElement.classList.remove("randomOne")
+                carYear.parentElement.classList.remove("input-valid")
+                carYear.parentElement.classList.add("input-invalid")
+                let wrongTextTwo = carYear.parentElement.querySelector("p")
+                if (wrongTextTwo) {
+                    carYear.parentElement.removeChild(wrongTextTwo)
+                }
+                let required = document.createElement("p")
+                console.log(required)
+                required.innerText = "*Please enter a 4 digit year"
+                required.classList.add("required")
+                carYear.parentElement.appendChild(required)
+                }
         } else {
             console.log("Stuff in here!")
             input.parentElement.classList.remove("input-invalid")
@@ -73,7 +102,24 @@ parkingForm.addEventListener("submit", function (e) {
     }
 })
 
-
+//Yeah I broke this.  This doesn't work the way I thought it would.  It gets caught up on Name and doesn't fully loop through.
+// else if (!numbers.test(carYear.value)){
+//     if (carYear.parentElement.classList.contains("randomThree")){ //"input-invalid"
+//     } else {
+//     carYear.parentElement.classList.add("randomThree")
+//     carYear.parentElement.classList.remove("randomOne")
+//     carYear.parentElement.classList.remove("input-valid")
+//     carYear.parentElement.classList.add("input-invalid")
+//     let wrongTextTwo = carYear.parentElement.querySelector("p")
+//     if (wrongTextTwo) {
+//         carYear.parentElement.removeChild(wrongTextTwo)
+//     }
+//     let required = document.createElement("p")
+//     console.log(required)
+//     required.innerText = "*Please enter a 4 digit year"
+//     required.classList.add("required")
+//     carYear.parentElement.appendChild(required)
+//     }
 
 //I'm about to break this: 
 // let fields = document.querySelectorAll(".field")
@@ -130,9 +176,6 @@ parkingForm.addEventListener("submit", function (e) {
 //         }
 //     }
 // })
-
-
-
 
 
 //Noting this for when I inevitably break it:
